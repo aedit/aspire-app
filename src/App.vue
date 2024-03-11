@@ -1,21 +1,27 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-drawer
+    <q-drawer 
       show-if-above
-      bordered
-      class="bg-grey-2"
+      :width="340"
+      class="bg-secondary text-white q-pa-xl"
     >
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="school" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
+        <q-item-label header class="q-pa-none flex flex-start">
+          <img src="./assets/Aspire-Logo.svg" alt="Aspire Logo" height="35px">
+        </q-item-label>
+        <q-item-label class="text-white-opacity-30 q-pt-md">
+          Trusted way of banking for 3,000+ SMEs and startups in Singapore
+        </q-item-label>
+        <div class="q-pt-xl">
+          <q-item v-for="item in menuOptions" :key="item.title" clickable tag="a" :to="item.routeTo" class="q-my-lg q-pa-none">
+            <q-item-section avatar>
+              <q-icon :name="item.icon"></q-icon>
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-body1">{{item.title}}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </div>
       </q-list>
     </q-drawer>
 
@@ -26,15 +32,42 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'LayoutDefault',
   components: {
   },
-  setup () {
+  setup() {
+    const menuOptions = [
+      {
+        title: 'Home',
+        icon: 'icon-Home',
+        routeTo: '/'
+      },
+      {
+        title: 'Cards',
+        icon: 'icon-Card',
+        routeTo: '/cards'
+      },
+      {
+        title: 'Payments',
+        icon: 'icon-Payments',
+        routeTo: '/payments'
+      },
+      {
+        title: 'Credit',
+        icon: 'icon-arrowed-up',
+        routeTo: '/credit'
+      },
+      {
+        title: 'Settings',
+        icon: 'icon-Account',
+        routeTo: '/settings'
+      },
+    ]
     return {
-      leftDrawerOpen: ref(false)
+      menuOptions
     }
   }
 })
