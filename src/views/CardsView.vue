@@ -28,9 +28,7 @@
       </div>
     </div>
 
-    <div v-if="tabs === 'my-cards'" class="row q-pa-lg">
-      My Cards
-    </div>
+    <my-cards v-if="tabs === 'my-cards'" />
 
     <div v-else class="row q-pa-lg">
       All Cards
@@ -39,14 +37,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
+import MyCards from '@/components/MyCards.vue';
+import { useStore } from 'vuex';
+
 
 export default defineComponent({
   name: 'CardsView',
   components: {
+    MyCards
   },
   setup() {
     const newCard = ref(false)
+
+    const store = useStore();
+
+    onMounted(() => {
+            store.dispatch('fetchCards')
+    })
 
     return {
       tabs: ref('my-cards'),
