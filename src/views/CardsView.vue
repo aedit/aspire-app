@@ -17,8 +17,23 @@
       </div>
     </header>
 
-    <div>
+    <div class="tabs flex q-mt-lg q-mb-md font-14">
+      <div class="tabs__item cursor-pointer q-pb-sm" :class="{ 'tabs__item--active': tabs === 'my-cards' }"
+        @click="tabs = 'my-cards'">
+        My debit cards
+      </div>
+      <div class="tabs__item cursor-pointer q-pb-sm" @click="tabs = 'all-cards'"
+        :class="{ 'tabs__item--active': tabs === 'all-cards' }">
+        All company cards
+      </div>
+    </div>
 
+    <div v-if="tabs === 'my-cards'" class="row q-pa-lg">
+      My Cards
+    </div>
+
+    <div v-else class="row q-pa-lg">
+      All Cards
     </div>
   </q-page>
 </template>
@@ -34,6 +49,7 @@ export default defineComponent({
     const newCard = ref(false)
 
     return {
+      tabs: ref('my-cards'),
       newCard
     }
   }
@@ -48,6 +64,21 @@ export default defineComponent({
     &__currency {
       border-radius: 4px;
       padding: 2px 12px;
+    }
+
+  }
+
+  .tabs {
+    font-weight: 600;
+    gap: 2rem;
+
+    &__item {
+      color: rgba(0, 0, 0, 0.3);
+
+      &--active {
+        border-bottom: 3px solid $accent-secondary;
+        color: black;
+      }
     }
 
   }
