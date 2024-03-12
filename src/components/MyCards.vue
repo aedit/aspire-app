@@ -21,7 +21,7 @@
                 v-for="card in cards" 
                 :key="card.cardNumber" 
                 @click="slide = card.cardNumber" 
-                class="carousel-navigation"
+                class="carousel-navigation q-mr-sm"
                 :class="{'carousel-navigation--active': card.cardNumber === slide}"
             />
         </div>
@@ -51,7 +51,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-6 col">
-        Right Section
+        
     </div>
   </div>
 </template>

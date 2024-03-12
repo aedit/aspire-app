@@ -33,6 +33,31 @@
     <div v-else class="row q-pa-lg">
       All Cards
     </div>
+
+    <q-dialog v-model="newCard" @hide="popupClosed">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">Add New Card</div>
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          Please input your name below
+        </q-card-section>
+
+        <q-card-section class="q-pt-none">
+          <q-input dense v-model="newCardDetail" autofocus @keyup.enter="addCard" />
+        </q-card-section>
+
+        <q-card-section class="q-pt-none text-negative">
+          {{ newCardAddError }}
+        </q-card-section>
+
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancel" v-close-popup />
+          <q-btn flat label="Add Card" @click="addCard" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
@@ -49,8 +74,28 @@ export default defineComponent({
   },
   setup() {
     const newCard = ref(false)
+    const newCardDetail = ref('');
+    const newCardAddError = ref('')
 
     const store = useStore();
+
+    const addCard = () => {
+      console.log(newCardDetail.value)
+
+      if (newCardDetail.value === '') {
+        newCardAddError.value = 'Please input a name';
+        return;
+      }
+      store.dispatch('addCard', newCardDetail.value)
+      newCard.value = false;
+      newCardAddError.value = ''
+      newCardDetail.value = ''
+    }
+
+    const popupClosed = () => {
+      newCardAddError.value = ''
+      newCardDetail.value = ''
+    }
 
     onMounted(() => {
             store.dispatch('fetchCards')
@@ -58,7 +103,11 @@ export default defineComponent({
 
     return {
       tabs: ref('my-cards'),
-      newCard
+      newCard,
+      newCardDetail,
+      newCardAddError,
+      addCard,
+      popupClosed
     }
   }
 });
