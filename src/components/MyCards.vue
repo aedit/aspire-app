@@ -27,7 +27,7 @@
         </div>
 
         <div class="row card-menu q-py-md q-px-lg font-13">
-            <div class="flex column col flex-center cursor-pointer" @click="freezeCard(slide)">
+            <div class="flex column col flex-center cursor-pointer" @click="toggleCardFreeze(slide)">
                 <img src="@/assets/freeze.svg" alt="freeze" srcset="">
                 <span class="q-mt-xs flex">Freeze Card</span>
             </div>
@@ -139,15 +139,16 @@ export default defineComponent({
             return cards.value.find((el:Card) => el.cardNumber === id)?.transactions;
         }
 
-        const freezeCard = (cardNumber: string) => {
+        const toggleCardFreeze = (cardNumber: string) => {
             console.log(cardNumber)
+            store.commit('freezeCard', { cardNumber })
         }
         
         return {
             slide,
             cards,
             getCardTransaction,
-            freezeCard,
+            toggleCardFreeze,
         }
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="card-image">
+    <div class="card-image" :class="{'disabled': card.isFreeze}">
         <div 
             class="text-primary text-bold font-12 flex items-center justify-end q-mb-sm cursor-pointer" 
             @click="showCardDetails = !showCardDetails"

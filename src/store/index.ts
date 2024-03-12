@@ -19,6 +19,11 @@ export default createStore<State>({
     updateCards(state: State, cards: Card[]) {
       state.cards = cards;
     },
+    freezeCard(state: State, { cardNumber }: { cardNumber: string }) {
+      const card = state.cards.find((el: Card) => el.cardNumber === cardNumber);
+      if (card)
+        card.isFreeze = !card.isFreeze
+    }
   },
   actions: {
     fetchCards({ state, commit }) {
