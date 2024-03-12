@@ -1,5 +1,5 @@
 <template>
-  <div class="my-cards row q-pa-lg">
+  <div class="my-cards row q-pa-md">
     <div class="col-xs-12 col-sm-12 col-md-6 col flex column items-center">
         <q-carousel 
             v-model="slide"
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-6 col">
+    <div class="col-xs-12 col-sm-12 col-md-6 col q-pt-xl">
         <q-expansion-item class="q-mb-lg" expand-icon="icon-down-arrow" expand-icon-class="expansion-header-icon">
           <template v-slot:header>
             <div class="flex items-center text-secondary font-14 q-pa-lg">

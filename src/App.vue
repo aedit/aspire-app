@@ -2,6 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-drawer 
       show-if-above
+      :mini="$q.screen.width < 1300"
       :width="340"
       class="bg-secondary text-white q-pa-xl"
     >
