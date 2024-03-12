@@ -26,6 +26,13 @@
       </q-list>
     </q-drawer>
 
+    <q-footer v-if="$q.screen.width < 1023" class="bg-white text-grey flex items-center justify-around">
+      <q-item v-for="item in menuOptions" :key="item.title" clickable tag="a" :to="item.routeTo" class="q-my-lg q-pa-none flex column flex-center font-16">
+        <q-icon :name="item.icon" class="q-mb-sm"></q-icon>
+        <q-item-label class="text-body1 flex flex-center">{{item.title}}</q-item-label>
+      </q-item>
+    </q-footer>
+
     <q-page-container>
       <router-view />
     </q-page-container>
